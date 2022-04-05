@@ -12,7 +12,7 @@
 
 ## 추상화: 모델링
 * 객체를 특성(속성, 기능)에 따라 분류 → **클래스(분류)**
-* 클래스를 이용하여 **객체(클래스의 인스턴스)**를 만들었다
+* 클래스를 이용하여 **객체(클래스의 인스턴스)** 를 만들었다
 * **추상화 = 모델링**   
   * 특성(속성, 기능)을 가지고 재조합하는 것이다.
     * 속성: 값
@@ -122,3 +122,68 @@ Static 영역: java.lang 패키지, MouseDriver 클래스, Mouse 클래스
 * 인터페이스는 기능을 구현하도록 강제
   * **상위 클래스는 물려줄 특성이 풍성할 수 있도록 좋다.**
   * **인터페이스는 구현을 강제할 메서드의 개수가 적을수록 좋다.**
+
+### 상속과 메모리
+```
+class Animal {
+  
+  void showHabitat(){ ... }
+}
+class Penguin extends Animal {
+  void showName(){ ... }
+}
+```
+위와 같은 상황에서 ```Penguin pororo = new Penguin();```을 할경우 Penguin 클래스의 인스턴스와 Animal 클래스의 인스턴스 모두 힙영역에 생긴다. 
+
+![img.png](https://sehun-kim.github.io/sehun/assets/images/extends2.PNG)
+
+* ```Penguin pororo = new Penguin();```
+  * pororo는 Penguin 클래스 인스턴스 주소를 저장 
+  * showName(), showHabitat() 모두 사용 가능
+
+* ```Animal pingu = new Penguin();```
+  * pingu는 Animal 클래스 인스턴스 주소를 저장
+  * showName()은 사용 가능 
+  * **showHabitat() 사용 불가능**
+
+
+## 다형성
+### 오버라이딩 & 오버로딩
+* 다형성의 기본
+* 오버라이딩
+  * 상위 클래스 같은 메서드 이름, 같은 인자 리스트
+  * 구현부 재정의
+* 오버로딩
+  * 상위 클래스 같은 메서드 이름, 다른 인자 리스트
+
+### 다형성과 메모리
+![](https://sehun-kim.github.io/sehun/assets/images/poly1.PNG)
+* ```Penguin pororo = new Penguin();```, ```Animal pingu = new Penguin();```
+  * pororo
+    * ```showName()```: 하위 클래스에서 오버라이딩 한 내용이 실행된다.
+    * ```showName(yourName)```: 하위 클래스에서 오버로딩된 내용이 실행된다.
+    * ```showHabitat()```: 항위 클래스 메서스 내용 실행
+  * pingu
+    * ```showName()```: **하위 클래스에서 오버라이딩 한 내용이 실행된다.**
+    * ```showName(yourName)```: 사용 못함
+    * ```showHabitat()```: 사용 못함
+
+### 다형성은 사용장(개발자)에게 편의성을 준다.
+
+## 캡슐화
+
+#### 접근 제어자
+* private: 본인(같은 클래스)만 접근 가능
+* default: 같은 패키지 내의 클래스만 접근 가능
+* protected: 같은 패키지 + 상속 클래스에서만 접근 가능
+* public: 모두가 접근 가능 
+
+#### 정적 멤버 접근
+* ```클래스명.정적멤버```
+
+## Call by Value & Call by Reference
+### Call by Value
+* **값 그 자체를 저장하고 있다.**
+
+### Call by Reference
+* **주소값을 저장하고 있다.**
