@@ -179,7 +179,7 @@ class Penguin extends Animal {
 * public: 모두가 접근 가능 
 
 #### 정적 멤버 접근
-* ```클래스명.정적멤버```
+* 정적 멤버는  ```클래스명.정적멤버``` 방법을 사용하라!!
 
 ## Call by Value & Call by Reference
 ### Call by Value
