@@ -63,7 +63,7 @@ Static 영역: java.lang 패키지, MouseDriver 클래스, Mouse 클래스
     * **Heap 영역에 Mouse 클래스 인스턴스가 배치된다.**
     * main() 스택 프레임 내의 mickey의 변수 공간에서 Mouse 클래스의 주소 값을 가지고 있다.
   * mickey.sing();    
-    * sing(): 객체의 멤버 메서드
+    * sing(): 객체의 멤버 메서드, **호출 되어도 T 메모리 상에서 변화는 없다.**
     * main(): 클래스의 멤버 메서드
   * mickey = null;
     * mickey 변수는 더 이상 Mouse 객체(인스턴스)를 참조하지 않는다.
