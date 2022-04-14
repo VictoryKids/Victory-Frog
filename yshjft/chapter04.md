@@ -87,6 +87,7 @@ final void a() {...}
 ## 참고)
 객체가 100개 생성된다. → 동일한 멤버 메서드가 100개 만들어져야 한다. → 메모리 낭비
 
-**실제로는 멤버 메서드를 스태틱 영역에 단 하나만 보유한다!**
+**실제로는 멤버 메서드를 스태틱 영역에 단 하나만 보유한다!**   
 
+![](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FkLVgy%2Fbtq3DGRLr2G%2FWhXViwKGMaQTDozLK9hQg1%2Fimg.png)
 
