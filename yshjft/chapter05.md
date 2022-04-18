@@ -67,3 +67,33 @@ class 암컷강아지 extends 강아지 {
 
 ### 추상화
 설계를 할 때 반드시 SRP를 고려하자!!
+
+
+
+## OCP(Open Closed Principle)
+* **자신의 확장에는 열려 있고 주변의 변화에 대해서는 닫혀 있어야 한다.**
+* 상위 클래스 또는 인터페이스를 이용하여 구현
+  ```
+  class Car{
+    void drive() { ... }
+  }
+  
+  class Acar extends Car {
+    @Override
+    void drive() { ... }
+  }
+  
+  class Bcar extends Car {
+    @Override
+    void drive() { ... }
+  }
+  ```
+* jdbc는 대표적인 OCP 준수의 예시
+  * DB가 MySql이던, 오라클이던 자바 어플리케이션에 영향을 주지 않는다.
+* **유연성, 재사용성, 유지보수성 등을 얻을 수 있다.** 
+
+## LSP(Liskov Substitution Principle)
+* **서브 타입은 언제나 자신의 기반 타입으로 교체할 수 있어야 한다.**
+* 분류도 관계
+  * ```동물 뽀로로 = new 펭귄()``` 
+  * 하위에 존재하는 것은 상위에 있는 것의 역할을 할 수 있어야 한다.
