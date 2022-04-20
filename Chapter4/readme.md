@@ -100,10 +100,110 @@ public class 동물 {
 - {}블록은 객체 생성자가 실행되기 전에 먼저 실행된다.
 
 ## 04. final 키워드
+- final 키워드가 나타날 수 있는 곳은 딱 세 군데다.
+  - 클래스
+  - 변수
+  - 메서드
+  - 사실 객체 지향 언어의 구성 요소는 딱 세가지 뿐이다.
+
+### final과 클래스
+- 상속을 허락하지 않겠다는 의미다.
+
+### final과 변수
+- 반드시 선언과 초기화를 동시에 하거나, 생성자를 통해 초기화 해야한다. (정적 클래스의 경우 static 블록 내부에서 가능)
+- 다른 언어에서는 읽기 전용 상수를 `const` 키워드를 사용하기도 한다.
+
+### final과 메서드
+- 오버라이딩을 금지한다.
+
 ## 05. instanceof 연산자
+- 인스턴스는 클래스를 통해 만들어진 객체이다.
+- instanceof 연산자는 만들어진 객체가 특정 클래스의 인스턴스인지 물어보는 연산자다.
+- instancof는 결과로 true또는 false를 반환한다.
+
+
+``` java
+package com.example.week1.customer;
+
+class Animal {
+}
+
+class Bird extends Animal {
+}
+
+class Penguin extends Bird {
+
+}
+
+public class Drive {
+
+    public static void main(String[] args) {
+        Animal animal = new Animal();
+        Animal bird = new Bird();
+        Animal penguin = new Penguin();
+
+        System.out.println(animal instanceof Animal);
+
+        System.out.println(bird instanceof Animal);
+        System.out.println(bird instanceof Bird);
+
+        System.out.println(penguin instanceof Animal);
+        System.out.println(penguin instanceof Bird);
+        System.out.println(penguin instanceof Penguin);
+
+        System.out.println(penguin instanceof Object);
+    }
+}
+```
+
+- 위 결과는 모두 true이다.
+  - 참조 변수 타입이 아닌 `실제 객체의 타입에 의해 처리`하기 때문이다.
+    - bird instanceof Bird 가 true인 이유
+
+### instanceof 연산자는 LSP를 어기는 코드에서 주로 나타난다.
+- 따라서 instanceof가 서용된다면 리펙터링의 대상이 아닌지 점검해 봐야 한다.
+- [참조](https://flowingmooon.tistory.com/32)
+
 ## 06. package 키워드
+- package 키워드는 네임스페이스(이름공간)를 만들어주는 역할을 한다.
+- 거창하기는 하지만 특별히 하는일은 없다.
+- 그냥 스마트폰이라고 하면 누구의 것인지 구분할 수 없지만 철수의 스마트폰, 영희의 스마트폰이라고 하면 구분이 가능하다.
+  - 스마트폰이라는 명칭은 갖지만 소유자는 각각이 되는 것이다.
+  - 여기서 패키지가 소유자의 역할을 한다.
+
 ## 07. interface 키워드와 implements 키워드
+- 인터페이스는 추상 메서드와 정적 상수만 가질 수 있기에 따로 메서드에 public, abstract
+- 속성에 public, static, final을 붙이지 않아도 자동으로 적용된다.
+- 아래 2개의 인터페이스는 동일하다.
+  - Speakable2처럼 명확하게 사용하는것이 모범답안. 정답은 없다.
+
+``` java
+
+interface Speakable {
+  double PI = 3.14159;
+  final double absoluteZeroPoint = -275.15
+  
+  void sayYes();
+}
+
+interface Speakable2 {
+  public static final double PI = 3.14159;
+  public static final double absoluteZeroPoint = -275.15
+  
+  public abstract void sayYes();
+}
+```
+
+### Java8 버전의 변화
+- Default Method라고하는 객체 구상 메서드(구현체가 있는 메서드)를 사용할 수 있다.
+- 정적 추상 메서드를 지원할 수 있다.
+
 ## 08. this 키워드
+- this는 객체가 자기 자신을 지칭할 때 쓰는 키워드다.
+- 지역 변수와 속성(객체 변수, 정적 변수)의 이름이 같은 경우 지역변수가 우선.
+- 객체 변수와 이름이 같은 지역 변수가 있는 경우 객체 변수를 사용하려면 this를 접두사로 사용한다.
+- 정적 변수와 이름이 같은 지역 변수가 있는 경우 객체 변수를 사용하려면 클래스명을 접두사로 사용한다.
+
 ## 09. super 키워드
-## 10. 예비 고수를 위한 한마디
-## 11. 정리 - 자바 키워드와 OOP 확장
+- 단일 상속만을 지원하는 자바에서 super는 바로 위 상위 클래스의 인스턴스를 지칭하는 키워드다.
+- super 키워드로 바로 위 상위 클래스 인스턴스에 접근할 수 있지만 super.super 형태로 상위의 상위 클래스 인스턴스에 접근은 불가능하다.
