@@ -100,8 +100,7 @@ public class 동물 {
   - 클래스의 정적 메서드를 사용할 때
   - 클래스의 인스턴스를 최초로 만들 때
 
-### 왜 프로그램이 실행될 때 바로 클래스의 정보를 static 영역에 로딩하지 않고 처음 사용되는 시점에 로딩할까 ?
-
+### 클래스 로딩시점이 왜 실행시점이 아닌 사용시점인것일까? 
 - 메모리는 최대한 늦게 사용을 시작하고 최대한 빨리 반환하는 것이 가장 효율적이기 때문이다.
 - static 블록은 한번 올라가면 종료되기 전까지는 반환할 수 없지만, 그럼에도 최대한 늦게 로딩함으로써 메모리 사용을 최대한 늦추기 위해서다.
 
@@ -121,35 +120,32 @@ public class 동물 {
 - 반드시 선언과 초기화를 동시에 하거나, 생성자를 통해 초기화 해야한다. (정적 클래스의 경우 static 블록 내부에서 가능)
 - 다른 언어에서는 읽기 전용 상수를 `const` 키워드를 사용하기도 한다.
 - 언제 사용해야 하는지 ?
-  - 프로그램이 실행되는 동안 일정하게 유지되기를 원하는 할당 값에 대해서 final 변수를 사용해야 한다.
-
+  - 프로그램이 실행되는 동안 일정하게 유지되기를 원하는 경우.
+ 
 ### final과 클래스
-- 상속을 허락하지 않겠다는 의미다.
+- 상속을 허락하지 않는다.
 - final 클래스의 장점
   - 보안 제공
     - 무단 접근으로 부터 민감한 정보를 보호할 수 있다.
     - 해커는 하위 클래스에서 final이 아닌 클래스를 상속하고 이를 대체할 수 있다.
     - 이를 방지하기 위해 final 키워드로 클래스를 선언해 아무도 상속할 수 없도록 할 수 있다.
   - 불변 클래스를 만들기 위해 사용한다.
-    - 불변 클래스를 만들려면 final 키워드가 필수다. 이는 변경할 수 없는 클래스가 항상 최종 클래스임을 의미한다.
+    - 불변 클래스를 만들려면 final 키워드가 필수다. 이는 변경할 수 없는 클래스임을 의미한다.
+
 - 활용사례
   - Java에서 모든 래퍼 클래스는 final 클래스이다.
     - [Integer](https://docs.oracle.com/javase/8/docs/api/)
-
 
 ### final과 메서드
 - 오버라이딩을 금지한다.
 - 언제 사용해야 하는지 ?
   - final 메서드를 만드는 목적은 메서드를 부적절하게 오버라이딩하여 사용하는 것을 제한하는 것. 
-    - 오버라이딩은 논리적으로 틀린 것은 아니지만 방법의 의미가 바뀔 수 있고, 잘못 해석할 수도 있다.
+    - 오버라이딩은 논리적으로 틀린 것은 아니지만 의미가 바뀔 수 있고, 잘못 해석할 수도 있다.
     - 따라서 이러한 경우 원치 않는 메서드 재정의를 방지하기 위해 메서드를 final로 선언한다.
 - final method의 중요 사항
-  - private 키워드를 함께 사용하면 안된다.
-    - private 메소드는 서브클래스에서 상속되지 않고 최종메소드 처럼 작동하기 때문
-  - static final 메소드를 만들어서는 안된다.
-    - static 메서드는 어차피 재정의 못한다. 같이쓰는것은 의미가 없다. 정적 메서드를 재정의하려고 하면 메서드 숨김(method hiding)이라고 한다.
   - 성능
-    - final 메서드는 항상 컴파일 타임에 바인딩 된다. 컴파일러는 final메서드가 재정의할 수 없다는 것을 알기 때문에 non-final 메서드보다 더 나은 성능을 제공한다.
+    - final 메서드는 항상 컴파일 타임에 바인딩 된다. 
+    - 따라서 컴파일러는 final 메서드가 재정의할 수 없다는 것을 알기 때문에 non-final 메서드보다 더 나은 성능을 제공한다.
 
 - 활용사례
   - Object 클래스의 [notify()](https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#notify--) 및 [wait()](https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#wait--)
@@ -205,33 +201,26 @@ public class Drive {
 
 ## 06. package 키워드
 - package 키워드는 네임스페이스(이름공간)를 만들어주는 역할을 한다.
-- 거창하기는 하지만 특별히 하는일은 없다.
-- 그냥 스마트폰이라고 하면 누구의 것인지 구분할 수 없지만 철수의 스마트폰, 영희의 스마트폰이라고 하면 구분이 가능하다.
-  - 스마트폰이라는 명칭은 같지만 소유자는 각각이 되는 것이다.
-  - 여기서 패키지가 소유자의 역할을 한다.
+- 컴퓨터의 폴더와 마찬가지로 Java의 패키지를 사용해서 Java 응용프로그램을 관리한다.
+- 패키지는 주요 용도는 유사한 유형의 class, interface, enum 및 하위 패키지를 구성하는 것.
+- 패키지는 내장 패키지(Built in)와 유저정의 패키지(user-defined)로 구분할 수 있다.
+  - 내장 패키지는 자바에서 제공하는 패키지를 의미.
+    - java언어의 최상위 내장 패키지는 java이다.
+    - 따라서 모든 하위 패키지는 Java 패키지의 일부.
+<img width="709" alt="image" src="https://user-images.githubusercontent.com/26343023/164511480-c3d96529-a74f-4a96-82be-48d33f03c043.png">
+
 
 ## 07. interface 키워드와 implements 키워드
-- 인터페이스는 추상 메서드와 정적 상수만 가질 수 있기에 따로 메서드에 public, abstract
-- 속성에 public, static, final을 붙이지 않아도 자동으로 적용된다.
-- 아래 2개의 인터페이스는 동일하다.
-  - Speakable2처럼 명확하게 사용하는것이 모범답안. 정답은 없다.
+- 인터페이스는 Java에서 추상화를 달성할 수 있는 방법.
+- 클래스의 청사진. 클래스가 수행해야하는 작업을 지정.
+- interface의 모든 메서드의 기본값은 `public abstract`이다.
+- interface의 모든 변수는 `public static final` 이다.
+- 클래스에서는 interface를 구현하기 위해 `implements` 키워드를 사용.
+  - 1개의 클래스에서는 1개이상의 interface를 implements할 수 있다.(다중상속가능)
+  - interface를 확장하는 경우에는 extend 사용.
 
-``` java
+<img width="632" alt="image" src="https://user-images.githubusercontent.com/26343023/164512554-e5755f87-b2c4-4287-a735-c7f298860561.png">
 
-interface Speakable {
-  double PI = 3.14159;
-  final double absoluteZeroPoint = -275.15
-  
-  void sayYes();
-}
-
-interface Speakable2 {
-  public static final double PI = 3.14159;
-  public static final double absoluteZeroPoint = -275.15
-  
-  public abstract void sayYes();
-}
-```
 
 ### Java8 버전의 변화
 - Default Method라고하는 객체 구상 메서드(구현체가 있는 메서드)를 사용할 수 있다.
@@ -239,15 +228,38 @@ interface Speakable2 {
 
 ## 08. this 키워드
 - this는 객체가 자기 자신을 지칭할 때 쓰는 키워드다.
-- 지역 변수와 속성(객체 변수, 정적 변수)의 이름이 같은 경우 지역변수가 우선.
-- 객체 변수와 이름이 같은 지역 변수가 있는 경우 객체 변수를 사용하려면 this를 접두사로 사용한다.
-- 정적 변수와 이름이 같은 지역 변수가 있는 경우 객체 변수를 사용하려면 클래스명을 접두사로 사용한다.
+  - 지역 변수와 속성(객체 변수, 정적 변수)의 이름이 같은 경우 지역변수가 우선.
+  - 객체 변수와 이름이 같은 지역 변수가 있는 경우 객체 변수를 사용하려면 this를 접두사로 사용한다.
+  - 정적 변수와 이름이 같은 지역 변수가 있는 경우 정적 변수를 사용하려면 클래스명을 접두사로 사용한다.
+
+- 생성자 연결에 사용할 수 있다.[(Constructor chaining)](https://javagoal.com/constructor-chaining-in-java/)
+  - 생성자에서 다른 오버로딩 된 생성자를 호출한다.
+
+``` java
+public class Record  {
+    public Record() {
+        this("mountain");
+        System.out.println("No-Args Record");
+    }
+    
+    public Record(String name) {
+        System.out.println("name: "+name);
+    }
+    
+    public static void main(String args[]){
+        Record c = new Record();
+    }
+    
+    // result
+    // name: mountain
+    // No-Args Record
+}
+```
+
 
 ## 09. super 키워드
 - 단일 상속만을 지원하는 자바에서 super는 바로 위 상위 클래스의 인스턴스를 지칭하는 키워드다.
 - super 키워드로 바로 위 상위 클래스 인스턴스에 접근할 수 있지만 super.super 형태로 상위의 상위 클래스 인스턴스에 접근은 불가능하다.
 
 ## 참조
-- [final](https://javagoal.com/final-keyword-in-java/)
-- [final](https://techvidvan.com/tutorials/java-final-keyword/)
-- 
+- [참조 ](https://javagoal.com/)
