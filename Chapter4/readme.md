@@ -135,6 +135,8 @@ public class 동물 {
 - 활용사례
   - Java에서 모든 래퍼 클래스는 final 클래스이다.
     - [Integer](https://docs.oracle.com/javase/8/docs/api/)
+  - String 또한 final 클래스.
+    - [String](https://docs.oracle.com/javase/8/docs/api/)
 
 ### final과 메서드
 - 오버라이딩을 금지한다.
