@@ -197,6 +197,7 @@ public class Drive {
 
 ### instanceof 연산자는 LSP를 어기는 코드에서 주로 나타난다.
 - 따라서 instanceof가 사용된다면 리펙터링의 대상이 아닌지 점검해 봐야 한다.
+  - LSP원칙: 상위 타입의 객체를 하위 타입의 객체로 치환해도 상위 타입을 사용하는 프로그램은 정상적으로 동작해야 한다.
 - [참조](https://flowingmooon.tistory.com/32)
 
 ## 06. package 키워드
