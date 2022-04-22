@@ -135,6 +135,8 @@ public class 동물 {
 - 활용사례
   - Java에서 모든 래퍼 클래스는 final 클래스이다.
     - [Integer](https://docs.oracle.com/javase/8/docs/api/)
+  - String 또한 final 클래스.
+    - [String](https://docs.oracle.com/javase/8/docs/api/)
 
 ### final과 메서드
 - 오버라이딩을 금지한다.
@@ -197,7 +199,8 @@ public class Drive {
 
 ### instanceof 연산자는 LSP를 어기는 코드에서 주로 나타난다.
 - 따라서 instanceof가 사용된다면 리펙터링의 대상이 아닌지 점검해 봐야 한다.
-- [참조](https://flowingmooon.tistory.com/32)
+  - LSP원칙: 상위 타입의 객체를 하위 타입의 객체로 치환해도 상위 타입을 사용하는 프로그램은 정상적으로 동작해야 한다.
+  - [참조](https://flowingmooon.tistory.com/32)
 
 ## 06. package 키워드
 - package 키워드는 네임스페이스(이름공간)를 만들어주는 역할을 한다.
