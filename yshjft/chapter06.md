@@ -194,3 +194,140 @@ public class Cat extends Animal {
 * 의존 역전의 법칙(DIP)을 활용 
 
 
+## 팩토리 메서드 패턴(Factory Method Pattern)
+* 팩토리 메서드: 객체를 생성하여 반환하는 메서드 
+```
+public abstract class Animal {
+  abstract AnimalToy getToy();
+}
+
+public abstract class AnimalToy {
+  abstract void identify();
+}
+
+public class Dog extneds Animal {
+  @Override 
+  AnimalToy getToy() {
+    return new DogToy();
+  }
+}
+
+public class DogToy extends AnimalToy {
+  @Override
+  public void identify() {
+    System.out.println("나는 테스니스공!");
+  }
+}
+
+public class Cat extends Animal {
+  @Override
+  AnimalToy getToy() {
+    return new CatToy();
+  }
+}
+
+public class CatToy extends AnimalToy {
+  @Override
+  public void identify() {
+    System.out.println("나는 캣타워!");
+  }
+}
+
+public class Driver {
+  public static void main(String[] args) {
+    Animal bolt = new Dog();
+    Animal kitty = new Cat();
+    
+    AnimalToy boltBall = bolt.getToy();
+    AnimalToy kittyTower = kitty.getToy();
+    
+    boltBall.identify();
+    kittyTower.identify();
+  }
+}
+```
+* 오버라이드된 메서드가 객체를 반환
+* 의존 역전 원칙 활용
+
+## 전략 패턴(Strategy Pattern)
+```
+// 전략
+public interface Strategy {
+  public abstract void runStrategy();
+}
+
+public class StrategyGun implements Strategy {
+  @Override
+  public void runStrategy() {
+    System.out.println("탕, 탕");
+  }
+}
+
+public class StrategySword implements Strategy {
+  @Override
+  public void runStrategy() {
+    System.out.println("챙, 챙");
+  }
+}
+
+// context
+public class Soldier {
+  void runContext(Strategy strategy) {
+    strategy.runStrategy();
+  }
+}
+
+// Client
+public class Client {
+  public static void main(String[] args) {
+    Strategy strategy = null;
+    Soldier a = new Soldier();
+    
+    strategy = new StrategyGun();
+    a.runContext(strategy);
+    
+    strategy = new StrategySword();
+    a.runContext(strategy);
+  }
+}
+```
+* 전략 패턴 구성 요소
+  * 전략 메서드를 가진 전략 객체
+  * 전략 객체를 사용하는 컨텍스트
+  * 전략 객체를 생성해 컨텍스트에 주입하는 클라이언트
+* 클라이언트가 전략을 생성해 전략을 실행하는 컨텍스트에 주입하는 패턴
+* OCP와 DIP가 적용된 패턴
+
+## 템플릿 콜백 패턴(Template Callback Pattern)
+* 전략 패턴의 변형
+  * 전략을 익명 내부 클래스로 정의해서 사용한다.
+* DI에서 사용하는 패턴
+```
+// 전략
+public interface Strategy {
+  public abstract void runStrategy();
+}
+
+public class Soldier {
+  void runContext(String weaponSound) {
+    strategy.runStrategy();
+  }
+  
+  private Strategy executeWeapon(final String weaponSound) {
+    return new Strategy() {
+      @Override
+      public void runStrategy() {
+        System.out.println(weaponSound);
+      }
+    }
+  }
+}
+
+public class Client {
+  public static void main(String[] args) {
+    Soldier a = new Soldier();
+    a.runContext("총 총 총");
+    a.runContext("칼 칼 칼");
+  }
+}
+```
