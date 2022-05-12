@@ -392,9 +392,8 @@ public class Start {
   * **굵은 글씨**: 필수
   * ex) ```* runSomething()```
 
-#### JointPoint
-* Aspect 적용 가능한 지점
-* Pointcut의 후보가 되는 모든 메서드
+#### JoinPoint
+* Pointcut의 후보가 되는 모든 메서드(Aspect 적용 가능한 지점)
 * 호출된 객체의 메서드
 
 #### Advice
