@@ -383,6 +383,7 @@ public class Start {
 * 컴파일 시점
 * 클래스 로딩 시점
 * 런타임 시점
+  * Bean을 만들 때 프록시 Bean 생성
 
 ### 용어
 #### Pointcut
@@ -492,6 +493,6 @@ public class MyAspect {
   * 어댑터 패턴을 이용하여 다수의 기술을 공통의 인터페이스로 제어할 수 있게하는 것
   * ex) @Transactional   
     PlatformTransactionManager 인터페이스를 사용
-    * JpaTransactionManager, DatasourceTransactionManager 등의 구현체 존재
+    * JpaTransactionManager(JPA), DatasourceTransactionManager(JDBC API) 등의 구현체 존재
     * 구현체를 바꾼다해서 aspect 코드가 변경되지 않습니다.
  
