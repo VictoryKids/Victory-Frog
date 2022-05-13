@@ -444,6 +444,38 @@ public class MyAspect {
 POJO(Plain Old Java Object)란 **객체 지향적인 원리에 충실**하면서 **환경과 기술에 종속되지 않고** 필요에 따라 재활용될 수 있는 방식으로 설계된 오브젝트를 의미
 
 #### 중복되는 Pointcut 리팩토링
+* BEFORE
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<beans 
+
+    ...
+    
+	<aop:config>
+		<aop:aspect ref="myAspect">			
+			<aop:before method="before" pointcut="execution(* runSomething())" />
+			<aop:after method="lockDoor" pointcut="execution(* runSomething())" />
+		</aop:aspect>
+	</aop:config>
+</beans>
+```
+```
+@Aspect
+public class MyAspect {
+	@Before("execution(* runSomething())")
+	public void before(JoinPoint joinPoint) {
+		System.out.println("얼굴 인식 확인: 문을 개방하라");
+	}
+	
+	@After("execution(* runSomething())")
+	public void lockDoor(JoinPoint joinPoint) {
+		System.out.println("주인님 나갔다: 어이 문 잠가!!!");
+	}
+}
+```
+
+
+* AFTER
 ```
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
